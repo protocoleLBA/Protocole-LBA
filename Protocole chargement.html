@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification de Lecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("rbdMCAW1iExb_Rc5a");
+        })();
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        iframe { width: 100%; height: 500px; border: 1px solid #ccc; }
+        form { margin-top: 20px; }
+        label, input, button { display: block; margin: 10px auto; }
+        canvas { border: 1px solid #000; display: block; margin: 10px auto; }
+    </style>
+</head>
+<body>
+    <h2>Veuillez lire le document avant de signer</h2>
+    <iframe src="https://drive.google.com/file/d/1iPYqFplhznE6FvllO5BqZ50Y_x25Jc5V/view?usp=drive_link" frameborder="0"></iframe>
+    
+    <form id="certificationForm">
+        <label>
+            <input type="checkbox" id="confirmRead" required>
+            J'atteste avoir lu et compris le document ci-dessus.
+        </label>
+        <input type="text" id="societe" placeholder="Votre Société" required>
+        <input type="text" id="nom" placeholder="Votre Nom" required>
+        <input type="date" id="date" required>
+        <input type="time" id="heure" required>
+        <canvas id="signaturePad" width="300" height="150"></canvas>
+        <button type="button" id="clearSignature">Effacer la signature</button>
+        <button type="submit">Soumettre</button>
+    </form>
+    
+    <script>
+        const canvas = document.getElementById('signaturePad');
+        const signaturePad = new SignaturePad(canvas);
+        document.getElementById('clearSignature').addEventListener('click', () => signaturePad.clear());
+
+        document.getElementById('certificationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const societe = document.getElementById('societe').value;
+            const nom = document.getElementById('nom').value;
+            const date = document.getElementById('date').value;
+            const heure = document.getElementById('heure').value;
+            const signatureData = signaturePad.toDataURL("image/png");
+            
+            fetch(signatureData)
+                .then(res => res.blob())
+                .then(blob => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        const base64data = reader.result.split(",")[1];
+                        
+                        const emailParams = {
+                            societe: societe,
+                            nom: nom,
+                            date: date,
+                            heure: heure,
+                            to_email: "Dylan.NGARNDO@demathieu-bard.fr, remi.rousseau@demathieu-bard.fr",
+                            attachment: {
+                                name: "signature.png",
+                                data: base64data
+                            }
+                        };
+                        
+                        emailjs.send("service_dz2cv9o", "template_hjb10b5", emailParams)
+                        .then(function(response) {
+                            alert("Signature envoyée avec succès !");
+                        }, function(error) {
+                            alert("Erreur lors de l'envoi de l'email.");
+                        });
+                    };
+                });
+        });
+    </script>
+</body>
+</html>
