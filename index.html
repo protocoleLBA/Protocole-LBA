@@ -38,7 +38,7 @@
 
     <script>
         // Configurez votre propre clé publique EmailJS ici
-        emailjs.init('rbdMCAW1iExb_Rc5a'); // Remplacez 'YOUR_USER_ID' par votre propre ID utilisateur d'EmailJS
+        emailjs.init('rbdMCAW1iExb_Rc5a');  // Remplace par ton vrai UserID
 
         document.getElementById('certificationForm').addEventListener('submit', function(event) {
             event.preventDefault();  // Empêcher le formulaire de se soumettre normalement
@@ -67,14 +67,15 @@
             // Envoi de l'email avec EmailJS
             emailjs.send("service_dz2cv9o", "template_hjb10b5", emailParams)
             .then(function(response) {
-                console.log("Email envoyé avec succès", response);  // Log de la réponse
+                console.log("Email envoyé avec succès", response);  // Afficher la réponse en cas de succès
                 alert("Données envoyées avec succès !");
             }, function(error) {
-                console.log("Erreur lors de l'envoi de l'email", error);  // Log de l'erreur
-                alert("Erreur lors de l'envoi de l'email.");
+                console.error("Erreur lors de l'envoi de l'email", error);  // Afficher l'erreur dans la console
+                alert("Erreur lors de l'envoi de l'email. Voir la console pour plus d'infos.");
             });
         });
     </script>
 </body>
 </html>
+
 
