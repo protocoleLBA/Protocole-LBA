@@ -10,7 +10,7 @@
         iframe { width: 100%; height: 500px; border: 1px solid #ccc; }
         form { margin-top: 20px; }
         label, input, button { display: block; margin: 10px auto; }
-        .signature-text { width: 100%; padding: 10px; font-size: 18px; }
+        .text-input { width: 100%; padding: 10px; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -29,9 +29,9 @@
         <input type="date" id="date" required>
         <input type="time" id="heure" required>
 
-        <!-- Champ de signature texte -->
-        <label for="signature">Signature :</label>
-        <input type="text" id="signature" class="signature-text" placeholder="Entrez votre signature" required>
+        <!-- Champ pour entrer le nom au lieu de la signature -->
+        <label for="nom">Nom (Signature) :</label>
+        <input type="text" id="nom" class="text-input" placeholder="Entrez votre nom" required>
 
         <button type="submit">Soumettre</button>
     </form>
@@ -44,14 +44,20 @@
             const entrepriseLivree = document.getElementById('entrepriseLivree').value;
             const date = document.getElementById('date').value;
             const heure = document.getElementById('heure').value;
-            const signature = document.getElementById('signature').value;
+            const nom = document.getElementById('nom').value; // Prendre le nom au lieu de la signature
+
+            // Vérifier si le champ "Nom" est vide
+            if (!nom) {
+                alert("Veuillez entrer votre nom avant de soumettre.");
+                return;
+            }
 
             const emailParams = {
                 societeDeLivraison: societeDeLivraison,
                 entrepriseLivree: entrepriseLivree,
                 date: date,
                 heure: heure,
-                signature: signature, // On envoie la signature sous forme de texte
+                nom: nom, // Envoyer le nom comme signature
                 to_email: "Dylan.NGARNDO@demathieu-bard.fr, remi.rousseau@demathieu-bard.fr",
             };
 
@@ -65,6 +71,3 @@
     </script>
 </body>
 </html>
-
-
-
