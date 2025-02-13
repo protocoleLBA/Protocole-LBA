@@ -11,7 +11,7 @@
         form { margin-top: 20px; }
         label, input, select, button { display: block; margin: 10px auto; }
         .text-input { width: 100%; padding: 10px; font-size: 18px; }
-        select { width: 100%; padding: 10px; font-size: 18px; }
+        .checkbox-label { font-size: 18px; }
     </style>
 </head>
 <body>
@@ -28,12 +28,13 @@
         <input type="text" id="societeDeLivraison" placeholder="Société de livraison" required>
         <input type="text" id="entrepriseLivree" placeholder="Entreprise livrée" required>
 
-        <!-- Menu déroulant pour le type d'opération -->
-        <label for="typeOperation">Type d'opération :</label>
-        <select id="typeOperation" required>
-            <option value="Chargement">Chargement</option>
-            <option value="Déchargement">Déchargement</option>
-        </select>
+        <!-- Type d'opération avec cases à cocher -->
+        <label class="checkbox-label">
+            <input type="checkbox" id="chargement" value="Chargement"> Chargement
+        </label>
+        <label class="checkbox-label">
+            <input type="checkbox" id="dechargement" value="Déchargement"> Déchargement
+        </label>
 
         <input type="date" id="date" required>
         <input type="time" id="heure" required>
@@ -54,7 +55,9 @@
 
             const societeDeLivraison = document.getElementById('societeDeLivraison').value;
             const entrepriseLivree = document.getElementById('entrepriseLivree').value;
-            const typeOperation = document.getElementById('typeOperation').value; // Récupérer le type d'opération
+            const chargement = document.getElementById('chargement').checked ? "Chargement" : ""; // Vérifie si "Chargement" est coché
+            const dechargement = document.getElementById('dechargement').checked ? "Déchargement" : ""; // Vérifie si "Déchargement" est coché
+            const typeOperation = chargement || dechargement; // Choisir l'opération sélectionnée
             const date = document.getElementById('date').value;
             const heure = document.getElementById('heure').value;
             const nom = document.getElementById('nom').value; // Prendre le nom au lieu de la signature
@@ -65,10 +68,16 @@
                 return;
             }
 
+            // Vérifier si une opération a été choisie
+            if (!typeOperation) {
+                alert("Veuillez sélectionner un type d'opération.");
+                return;
+            }
+
             const emailParams = {
                 societeDeLivraison: societeDeLivraison,
                 entrepriseLivree: entrepriseLivree,
-                typeOperation: typeOperation,  // Ajouter le type d'opération
+                typeOperation: typeOperation,  // Ajouter le type d'opération sélectionné
                 date: date,
                 heure: heure,
                 nom: nom, // Envoyer le nom comme signature
@@ -88,5 +97,6 @@
     </script>
 </body>
 </html>
+
 
 
