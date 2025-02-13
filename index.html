@@ -11,7 +11,9 @@
         form { margin-top: 20px; }
         label, input, select, button { display: block; margin: 10px auto; }
         .text-input { width: 100%; padding: 10px; font-size: 18px; }
+        .checkbox-container { display: inline-block; margin-right: 20px; }
         .checkbox-label { font-size: 18px; }
+        h3 { text-decoration: underline; font-size: 24px; }
     </style>
 </head>
 <body>
@@ -28,13 +30,18 @@
         <input type="text" id="societeDeLivraison" placeholder="Société de livraison" required>
         <input type="text" id="entrepriseLivree" placeholder="Entreprise livrée" required>
 
-        <!-- Type d'opération avec cases à cocher -->
-        <label class="checkbox-label">
-            <input type="checkbox" id="chargement" value="Chargement"> Chargement
-        </label>
-        <label class="checkbox-label">
-            <input type="checkbox" id="dechargement" value="Déchargement"> Déchargement
-        </label>
+        <!-- Titre sous-ligné pour le type d'opération -->
+        <h3>Type d'opération ?</h3>
+
+        <!-- Type d'opération avec cases à cocher à gauche -->
+        <div class="checkbox-container">
+            <input type="checkbox" id="chargement" value="Chargement">
+            <label for="chargement" class="checkbox-label">Chargement</label>
+        </div>
+        <div class="checkbox-container">
+            <input type="checkbox" id="dechargement" value="Déchargement">
+            <label for="dechargement" class="checkbox-label">Déchargement</label>
+        </div>
 
         <input type="date" id="date" required>
         <input type="time" id="heure" required>
@@ -97,6 +104,7 @@
     </script>
 </body>
 </html>
+
 
 
 
