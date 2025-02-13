@@ -6,11 +6,6 @@
     <title>Certification de Lecture</title>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
-        (function(){
-            emailjs.init("rbdMCAW1iExb_Rc5a");
-        })();
-    </script>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
         iframe { width: 100%; height: 500px; border: 1px solid #ccc; }
@@ -21,8 +16,10 @@
 </head>
 <body>
     <h2>Veuillez lire le document avant de signer</h2>
-    <iframe src="https://drive.google.com/file/d/1iPYqFplhznE6FvllO5BqZ50Y_x25Jc5V/view?usp=drive_link" frameborder="0"></iframe>
-    
+
+    <!-- Affichage du PDF (Assurez-vous que le PDF est dans le même dossier) -->
+    <iframe src="document.pdf" frameborder="0"></iframe>
+
     <form id="certificationForm">
         <label>
             <input type="checkbox" id="confirmRead" required>
@@ -36,7 +33,7 @@
         <button type="button" id="clearSignature">Effacer la signature</button>
         <button type="submit">Soumettre</button>
     </form>
-    
+
     <script>
         const canvas = document.getElementById('signaturePad');
         const signaturePad = new SignaturePad(canvas);
@@ -44,13 +41,13 @@
 
         document.getElementById('certificationForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const societe = document.getElementById('societe').value;
             const nom = document.getElementById('nom').value;
             const date = document.getElementById('date').value;
             const heure = document.getElementById('heure').value;
             const signatureData = signaturePad.toDataURL("image/png");
-            
+
             fetch(signatureData)
                 .then(res => res.blob())
                 .then(blob => {
@@ -58,7 +55,7 @@
                     reader.readAsDataURL(blob);
                     reader.onloadend = function() {
                         const base64data = reader.result.split(",")[1];
-                        
+
                         const emailParams = {
                             societe: societe,
                             nom: nom,
@@ -70,7 +67,7 @@
                                 data: base64data
                             }
                         };
-                        
+
                         emailjs.send("service_dz2cv9o", "template_hjb10b5", emailParams)
                         .then(function(response) {
                             alert("Signature envoyée avec succès !");
@@ -83,3 +80,4 @@
     </script>
 </body>
 </html>
+
