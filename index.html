@@ -16,8 +16,9 @@
         #header {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             margin-bottom: 20px;
+            text-align: center;
         }
         #logo {
             width: 50px; /* Ajuster la taille du logo */
@@ -26,19 +27,29 @@
         #title {
             font-size: 26px;
             font-weight: bold;
-            text-align: left;
+            text-align: center;
         }
         #title span {
             display: block;
             font-size: 20px;
             font-weight: normal;
         }
+        form {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input[type="text"], input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
     <!-- Section pour le logo et le titre -->
     <div id="header">
-        <img id="logo" src="https://github.com/protocoleLBA/Protocole-LBA/blob/main/logo.png" alt="Logo">
+        <img id="logo" src="https://raw.githubusercontent.com/protocoleLBA/Protocole-LBA/main/logo.png" alt="Logo">  <!-- Remplace par ton URL du logo -->
         <div id="title">
             Protocole de chargement/déchargement Gare LBA
             <span>Chantier SGP - L17.1.1</span>
@@ -59,8 +70,7 @@
         <input type="text" id="entrepriseLivree" placeholder="Entreprise livrée" required>
 
         <!-- Nouveau champ texte pour le type d'opération -->
-        <h3>Type d'opération</h3>
-        <input type="text" id="typeOperation" class="text-input" placeholder="Entrer le type d'opération (ex. Chargement, Déchargement)" required>
+        <input type="text" id="typeOperation" class="text-input" placeholder="Type d'opération (ex. Chargement, Déchargement)" required>
 
         <input type="date" id="date" required>
         <input type="time" id="heure" required>
@@ -121,6 +131,7 @@
     </script>
 </body>
 </html>
+
 
 
 
