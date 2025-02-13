@@ -21,7 +21,7 @@
             text-align: center;
         }
         #logo {
-            width: 50px; /* Ajuster la taille du logo */
+            width: 100px; /* Augmenter la taille du logo */
             margin-right: 20px;
         }
         #title {
@@ -43,6 +43,10 @@
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+        }
+        .instructions {
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
@@ -72,8 +76,13 @@
         <!-- Nouveau champ texte pour le type d'opération -->
         <input type="text" id="typeOperation" class="text-input" placeholder="Type d'opération (ex. Chargement, Déchargement)" required>
 
+        <label for="date">Date :</label>
         <input type="date" id="date" required>
+        <div class="instructions">Veuillez sélectionner la date d'opération.</div> <!-- Ajout de l'instruction -->
+
+        <label for="heure">Heure :</label>
         <input type="time" id="heure" required>
+        <div class="instructions">Veuillez sélectionner l'heure de l'opération.</div> <!-- Ajout de l'instruction -->
 
         <!-- Champ pour entrer le nom au lieu de la signature -->
         <label for="nom">Nom (Signature) :</label>
@@ -131,9 +140,5 @@
     </script>
 </body>
 </html>
-
-
-
-
 
 
