@@ -37,8 +37,11 @@
     </form>
 
     <script>
+        // Configurez votre propre clé publique EmailJS ici
+        emailjs.init('user_YOUR_USER_ID'); // Remplacez 'YOUR_USER_ID' par votre propre ID utilisateur d'EmailJS
+
         document.getElementById('certificationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault();  // Empêcher le formulaire de se soumettre normalement
 
             const societeDeLivraison = document.getElementById('societeDeLivraison').value;
             const entrepriseLivree = document.getElementById('entrepriseLivree').value;
@@ -61,13 +64,17 @@
                 to_email: "Dylan.NGARNDO@demathieu-bard.fr, remi.rousseau@demathieu-bard.fr",
             };
 
+            // Envoi de l'email avec EmailJS
             emailjs.send("service_dz2cv9o", "template_hjb10b5", emailParams)
             .then(function(response) {
+                console.log("Email envoyé avec succès", response);  // Log de la réponse
                 alert("Données envoyées avec succès !");
             }, function(error) {
+                console.log("Erreur lors de l'envoi de l'email", error);  // Log de l'erreur
                 alert("Erreur lors de l'envoi de l'email.");
             });
         });
     </script>
 </body>
 </html>
+
