@@ -6,54 +6,131 @@
     <title>Certification de Lecture</title>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        iframe { width: 100%; height: 500px; border: 1px solid #ccc; }
-        form { margin-top: 20px; }
-        label, input, select, button { display: block; margin: 10px auto; }
-        .text-input { width: 100%; padding: 10px; font-size: 18px; }
-        h3 { text-decoration: underline; font-size: 24px; }
-        /* Style pour le logo et le titre */
+        /* Définition des couleurs */
+        :root {
+            --orange: #ff6a13;  /* Orange Demathieu Bard */
+            --blue: #1c3d5c;    /* Bleu Demathieu Bard */
+            --white: #ffffff;
+            --light-gray: #f4f4f4;
+            --dark-gray: #333333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: var(--blue);
+        }
+
+        /* Logo et titre */
         #header {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 30px;
+            background-color: var(--blue);
+            padding: 10px;
+            color: var(--white);
         }
+
         #logo {
-            width: 100px; /* Augmenter la taille du logo */
+            width: 120px; /* Taille du logo */
             margin-right: 20px;
         }
+
         #title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             text-align: center;
         }
+
         #title span {
             display: block;
             font-size: 20px;
             font-weight: normal;
         }
+
+        /* Formulaire */
         form {
-            text-align: left;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             margin: 0 auto;
+            text-align: left;
         }
-        input[type="text"], input[type="date"], input[type="time"] {
+
+        input[type="text"], input[type="date"], input[type="time"], input[type="checkbox"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
         }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: var(--orange);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--blue);
+        }
+
+        label {
+            font-size: 16px;
+        }
+
         .instructions {
             font-size: 14px;
-            color: #555;
+            color: var(--dark-gray);
+        }
+
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--blue);
+            margin-bottom: 20px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        h2 {
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
     <!-- Section pour le logo et le titre -->
     <div id="header">
-        <img id="logo" src="https://raw.githubusercontent.com/protocoleLBA/Protocole-LBA/main/logo.png" alt="Logo">  <!-- Remplace par ton URL du logo -->
+        <img id="logo" src="https://raw.githubusercontent.com/protocoleLBA/Protocole-LBA/main/logo.png" alt="Logo">
         <div id="title">
             Protocole de chargement/déchargement Gare LBA
             <span>Chantier SGP - L17.1.1</span>
@@ -78,11 +155,11 @@
 
         <label for="date">Date :</label>
         <input type="date" id="date" required>
-        <div class="instructions">Veuillez sélectionner la date d'opération.</div> <!-- Ajout de l'instruction -->
+        <div class="instructions">Veuillez sélectionner la date d'opération.</div>
 
         <label for="heure">Heure :</label>
         <input type="time" id="heure" required>
-        <div class="instructions">Veuillez sélectionner l'heure de l'opération.</div> <!-- Ajout de l'instruction -->
+        <div class="instructions">Veuillez sélectionner l'heure de l'opération.</div>
 
         <!-- Champ pour entrer le nom au lieu de la signature -->
         <label for="nom">Nom (Signature) :</label>
@@ -140,5 +217,6 @@
     </script>
 </body>
 </html>
+
 
 
