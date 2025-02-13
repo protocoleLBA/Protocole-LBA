@@ -11,12 +11,40 @@
         form { margin-top: 20px; }
         label, input, select, button { display: block; margin: 10px auto; }
         .text-input { width: 100%; padding: 10px; font-size: 18px; }
-        .checkbox-container { display: inline-block; margin-right: 20px; }
-        .checkbox-label { font-size: 18px; }
         h3 { text-decoration: underline; font-size: 24px; }
+        /* Style pour le logo et le titre */
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+        #logo {
+            width: 50px; /* Ajuster la taille du logo */
+            margin-right: 20px;
+        }
+        #title {
+            font-size: 26px;
+            font-weight: bold;
+            text-align: left;
+        }
+        #title span {
+            display: block;
+            font-size: 20px;
+            font-weight: normal;
+        }
     </style>
 </head>
 <body>
+    <!-- Section pour le logo et le titre -->
+    <div id="header">
+        <img id="logo" src="URL_DU_LOGO" alt="Logo">
+        <div id="title">
+            Protocole de chargement/déchargement Gare LBA
+            <span>Chantier SGP - L17.1.1</span>
+        </div>
+    </div>
+
     <h2>Veuillez lire le document avant de signer</h2>
 
     <!-- Affichage du PDF hébergé sur GitHub Pages -->
@@ -30,18 +58,9 @@
         <input type="text" id="societeDeLivraison" placeholder="Société de livraison" required>
         <input type="text" id="entrepriseLivree" placeholder="Entreprise livrée" required>
 
-        <!-- Titre sous-ligné pour le type d'opération -->
-        <h3>Type d'opération ?</h3>
-
-        <!-- Type d'opération avec cases à cocher à gauche -->
-        <div class="checkbox-container">
-            <input type="checkbox" id="chargement" value="Chargement">
-            <label for="chargement" class="checkbox-label">Chargement</label>
-        </div>
-        <div class="checkbox-container">
-            <input type="checkbox" id="dechargement" value="Déchargement">
-            <label for="dechargement" class="checkbox-label">Déchargement</label>
-        </div>
+        <!-- Nouveau champ texte pour le type d'opération -->
+        <h3>Type d'opération</h3>
+        <input type="text" id="typeOperation" class="text-input" placeholder="Entrer le type d'opération (ex. Chargement, Déchargement)" required>
 
         <input type="date" id="date" required>
         <input type="time" id="heure" required>
@@ -62,9 +81,7 @@
 
             const societeDeLivraison = document.getElementById('societeDeLivraison').value;
             const entrepriseLivree = document.getElementById('entrepriseLivree').value;
-            const chargement = document.getElementById('chargement').checked ? "Chargement" : ""; // Vérifie si "Chargement" est coché
-            const dechargement = document.getElementById('dechargement').checked ? "Déchargement" : ""; // Vérifie si "Déchargement" est coché
-            const typeOperation = chargement || dechargement; // Choisir l'opération sélectionnée
+            const typeOperation = document.getElementById('typeOperation').value; // Récupérer le type d'opération entré
             const date = document.getElementById('date').value;
             const heure = document.getElementById('heure').value;
             const nom = document.getElementById('nom').value; // Prendre le nom au lieu de la signature
@@ -75,16 +92,16 @@
                 return;
             }
 
-            // Vérifier si une opération a été choisie
+            // Vérifier si le champ "Type d'opération" est vide
             if (!typeOperation) {
-                alert("Veuillez sélectionner un type d'opération.");
+                alert("Veuillez entrer le type d'opération.");
                 return;
             }
 
             const emailParams = {
                 societeDeLivraison: societeDeLivraison,
                 entrepriseLivree: entrepriseLivree,
-                typeOperation: typeOperation,  // Ajouter le type d'opération sélectionné
+                typeOperation: typeOperation,  // Ajouter le type d'opération entré
                 date: date,
                 heure: heure,
                 nom: nom, // Envoyer le nom comme signature
@@ -104,6 +121,7 @@
     </script>
 </body>
 </html>
+
 
 
 
